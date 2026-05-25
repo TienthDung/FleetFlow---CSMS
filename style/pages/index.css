@@ -1,0 +1,149 @@
+/* =========================================
+   NAVBAR & LOGO TRÀN VIỀN
+========================================= */
+.custom-navbar {
+  background-color: var(--color-1); /* Lấy màu xanh 00B14F từ base.css */
+  height: 70px; /* Fix cứng chiều cao navbar */
+  padding: 0 !important; /* Xóa toàn bộ khoảng không mặc định */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Xử lý Logo tràn xuống */
+/* =========================================
+.brand-overflow {
+  position: relative; /* Trả logo về vị trí bình thường, không làm thõng xuống nữa */
+  height: 70px; /* Chiều cao bằng chính xác chiều cao của .custom-navbar */
+  display: flex;
+  align-items: center;
+  padding: 0; /* Xóa khoảng trống để ảnh chạm sát viền trên dưới */
+  background-color: transparent; /* Xóa nền trắng dư thừa */
+  box-shadow: none; /* Xóa bóng đổ */
+}
+
+.brand-overflow .logo-img {
+  height: 100%; /* Ảnh sẽ lấy chiều cao tối đa 70px của thẻ a */
+  width: auto; /* Tự động co giãn chiều ngang để ảnh không bị méo */
+  object-fit: contain; /* Ép hình ảnh hiển thị trọn vẹn, không bị cắt xén */
+  padding: 5px 0; /* Thêm một chút lề trên dưới cho ảnh đỡ sát viền quá (nếu muốn chạm viền 100% thì đổi thành 0) */
+}
+
+/* Các link trên Navbar */
+.nav-link {
+  transition: opacity var(--transition-speed) ease;
+}
+
+.nav-link:hover {
+  opacity: 0.8;
+  color: var(--color-3) !important; /* Hover ra màu vàng FFDE59 */
+}
+
+/* Nút Đăng nhập riêng biệt trên Nav */
+.btn-login {
+  background-color: var(--color-2);
+  color: var(--color-1);
+  border: none;
+  border-radius: 50px;
+  padding: 8px 20px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+}
+
+.btn-login:hover {
+  background-color: var(--color-3);
+  color: #333;
+  transform: translateY(-2px);
+}
+
+/* =========================================
+   HERO SECTION
+========================================= */
+.hero-section {
+  min-height: calc(100vh - 70px);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 80px 0;
+}
+
+.z-1 {
+  z-index: 1;
+}
+
+/* Phóng to chữ trên màn hình máy tính */
+.header-slogan {
+  font-size: 5 rem !important; /* Tăng số này lên (ví dụ: 6rem, 7rem) nếu muốn to hơn nữa */
+  line-height: 1.1; /* Thu nhỏ khoảng cách giữa các dòng cho chữ đỡ bị rời rạc */
+  text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.25); /* Tăng nhẹ bóng đổ để chữ nổi bật hơn trên ảnh */
+}
+
+/* Đừng quên thu nhỏ lại một chút trên điện thoại để chữ không bị tràn màn hình */
+@media (max-width: 991.98px) {
+  .header-slogan {
+    font-size: 3.5rem !important;
+  }
+}
+
+.description-text {
+  max-width: 500px;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* =========================================
+   FLOATING BUTTONS
+========================================= */
+.floating-contact-buttons {
+  position: fixed;
+  bottom: 40px;
+  right: 25px;
+  z-index: 999;
+}
+
+.social-icon-btn {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+  transition: transform var(--transition-speed) ease;
+  background-color: var(--color-2);
+}
+
+.social-icon-btn:hover {
+  transform: scale(1.5);
+}
+
+/* =========================================
+   RESPONSIVE (MOBILE VIEW)
+========================================= */
+@media (max-width: 991.98px) {
+  /* Đẩy chữ tránh khu vực logo khi ở mobile */
+  .collapse.navbar-collapse {
+    background-color: var(--color-1);
+    padding: 20px;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .brand-overflow {
+    height: 80px; /* Thu nhỏ logo tràn viền lại trên điện thoại */
+  }
+
+  .hero-section {
+    text-align: center;
+    background-position: left center;
+  }
+
+  .header-slogan {
+    font-size: 3rem;
+  }
+  .description-text {
+    margin: 0 auto 2.5rem auto;
+  }
+}
