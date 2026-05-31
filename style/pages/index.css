@@ -1,6 +1,12 @@
+/* ==========================================================================
+   FLEETFLOW - INDEX PAGE STYLESHEET
+========================================================================== */
+
 /* =========================================
-   NAVBAR & LOGO TRÀN VIỀN
+   1. NAVBAR & LOGO TRÀN VIỀN
 ========================================= */
+
+/* Định dạng tổng thể thanh điều hướng (Navbar) */
 .custom-navbar {
   background-color: var(--color-1); /* Lấy màu xanh 00B14F từ base.css */
   height: 70px; /* Fix cứng chiều cao navbar */
@@ -8,10 +14,26 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Xử lý Logo tràn xuống */
-/* =========================================
+/* Định dạng lưới Container cơ sở dùng chung */
+.container-base {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* Ép container của navbar căng tràn giới hạn bằng với container ở dưới */
+.custom-navbar .container-base {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Đẩy logo ra mép trái, các link ra mép phải */
+  padding: 0 15px; /* Đảm bảo padding-left khớp với cột col-lg-6 */
+}
+
+/* Xử lý Logo (Nằm gọn trong Navbar, không làm thõng xuống) */
 .brand-overflow {
-  position: relative; /* Trả logo về vị trí bình thường, không làm thõng xuống nữa */
+  position: relative; /* Trả logo về vị trí bình thường */
   height: 70px; /* Chiều cao bằng chính xác chiều cao của .custom-navbar */
   display: flex;
   align-items: center;
@@ -20,11 +42,12 @@
   box-shadow: none; /* Xóa bóng đổ */
 }
 
+/* Định dạng hình ảnh Logo bên trong */
 .brand-overflow .logo-img {
   height: 100%; /* Ảnh sẽ lấy chiều cao tối đa 70px của thẻ a */
   width: auto; /* Tự động co giãn chiều ngang để ảnh không bị méo */
   object-fit: contain; /* Ép hình ảnh hiển thị trọn vẹn, không bị cắt xén */
-  padding: 5px 0; /* Thêm một chút lề trên dưới cho ảnh đỡ sát viền quá (nếu muốn chạm viền 100% thì đổi thành 0) */
+  padding: 5px 0; /* Thêm một chút lề trên dưới cho ảnh đỡ sát viền quá */
 }
 
 /* Các link trên Navbar */
@@ -56,9 +79,73 @@
   transform: translateY(-2px);
 }
 
+
 /* =========================================
-   HERO SECTION
+   2. CUSTOM DROPDOWN MENU & TRANSITION UNDERLINE
 ========================================= */
+
+/* Định hình lại khung menu thả xuống */
+.custom-navbar .dropdown-menu {
+  border-radius: 8px;
+  padding: 8px 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Cấu hình chữ cho các option ở trạng thái bình thường */
+.custom-navbar .dropdown-item {
+  font-size: 0.95rem;
+  padding: 10px 20px;
+  background-color: transparent !important;
+  color: #333 !important; /* Màu chữ gốc mặc định */
+  position: relative; /* Bắt buộc phải có để làm điểm tựa cho đường gạch chạy */
+  display: inline-block;
+  width: 100%;
+  transition: color var(--transition-speed) ease;
+}
+
+/* Tạo đường gạch chân ẩn sẵn nằm dưới chữ */
+.custom-navbar .dropdown-item::after {
+  content: "";
+  position: absolute;
+  left: 20px; /* Thụt lề bằng đúng padding-left của dropdown-item */
+  bottom: 4px; /* Khoảng cách từ chân chữ xuống đường gạch */
+
+  /* ĐỘ LỚN: Thay đổi độ dày của đường gạch tại đây */
+  height: 3px; 
+
+  /* ĐỘ DÀI: Tính toán độ dài đường gạch bằng chiều ngang chữ (trừ đi 2 bên lề padding 20px * 2) */
+  width: calc(100% - 40px);
+
+  background-color: var(--color-3); /* Đường gạch màu vàng chuẩn */
+
+  /* HIỆU ỨNG: Thu nhỏ đường gạch về 0 và đặt tâm chuyển động ở bên trái */
+  transform: scaleX(0);
+  transform-origin: bottom left;
+  transition: transform var(--transition-speed) ease-in-out;
+}
+
+/* Hiệu ứng Hover: Chữ đổi màu xanh và đường gạch kích hoạt chạy ra */
+.custom-navbar .dropdown-item:hover {
+  font-weight: 700; /* Tăng độ đậm vừa phải để không bị lệch layout */
+}
+
+/* Khi hover vào item, đường gạch chân ::after sẽ phóng to lên kích thước đầy đủ (scaleX = 1) */
+.custom-navbar .dropdown-item:hover::after {
+  transform: scaleX(1);
+}
+
+/* Đường kẻ phân chia */
+.custom-navbar .dropdown-divider {
+  border-top: 1px solid rgba(0, 0, 0, 0.15) !important;
+  margin: 6px 0;
+}
+
+
+/* =========================================
+   3. HERO SECTION
+========================================= */
+
+/* Khu vực banner chính */
 .hero-section {
   min-height: calc(100vh - 70px);
   background-size: cover;
@@ -73,16 +160,9 @@
 
 /* Phóng to chữ trên màn hình máy tính */
 .header-slogan {
-  font-size: 5 rem !important; /* Tăng số này lên (ví dụ: 6rem, 7rem) nếu muốn to hơn nữa */
+  font-size: 5 rem !important; /* Tăng số này lên nếu muốn to hơn nữa */
   line-height: 1.1; /* Thu nhỏ khoảng cách giữa các dòng cho chữ đỡ bị rời rạc */
   text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.25); /* Tăng nhẹ bóng đổ để chữ nổi bật hơn trên ảnh */
-}
-
-/* Đừng quên thu nhỏ lại một chút trên điện thoại để chữ không bị tràn màn hình */
-@media (max-width: 991.98px) {
-  .header-slogan {
-    font-size: 3.5rem !important;
-  }
 }
 
 .description-text {
@@ -90,9 +170,12 @@
   color: rgba(255, 255, 255, 0.95);
 }
 
+
 /* =========================================
-   FLOATING BUTTONS
+   4. FLOATING BUTTONS
 ========================================= */
+
+/* Cụm nút liên hệ nổi góc dưới màn hình */
 .floating-contact-buttons {
   position: fixed;
   bottom: 40px;
@@ -100,6 +183,7 @@
   z-index: 999;
 }
 
+/* Định dạng từng nút tròn */
 .social-icon-btn {
   width: 55px;
   height: 55px;
@@ -116,9 +200,12 @@
   transform: scale(1.5);
 }
 
+
 /* =========================================
-   RESPONSIVE (MOBILE VIEW)
+   5. RESPONSIVE (MOBILE VIEW)
 ========================================= */
+
+/* Đừng quên thu nhỏ lại một chút trên điện thoại để chữ không bị tràn màn hình */
 @media (max-width: 991.98px) {
   /* Đẩy chữ tránh khu vực logo khi ở mobile */
   .collapse.navbar-collapse {
@@ -141,9 +228,20 @@
   }
 
   .header-slogan {
-    font-size: 3rem;
+    font-size: 3.5rem !important; /* Áp dụng đè lên cái cũ bị thiếu important */
   }
+
   .description-text {
     margin: 0 auto 2.5rem auto;
   }
+}
+
+/* =========================================
+   HIỆU ỨNG HOVER BUNG DROPDOWN (CHỈ DÀNH CHO DESKTOP)
+========================================= */
+@media (min-width: 992px) {
+    .nav-item.dropdown:hover .dropdown-menu {
+        display: block; /* Bật hiển thị menu khi hover vào thẻ li cha */
+        margin-top: 0; /* Đảm bảo menu nằm sát chân navbar, không bị hở */
+    }
 }
