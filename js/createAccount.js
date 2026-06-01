@@ -1,23 +1,25 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const registerForm = document.querySelector("form");
-    const dobSelect = document.getElementById("dob");
+    const registerForm = document.getElementById("registerForm");
+    const yobSelect = document.getElementById("yob");
 
     // 1. Tối ưu sinh động danh sách Năm sinh (Date of Birth Dropdown)
-    if (dobSelect) {
+    if (yobSelect) {
         const currentYear = new Date().getFullYear();
-        const startYear = 1970;
-        const endYear = currentYear - 16; // Giới hạn người dùng phải từ 16 tuổi trở lên
-
-        // Reset lại nội dung ban đầu của thẻ select
-        dobSelect.innerHTML = '<option value="" disabled selected>Select</option>';
+        const maxAllowedYear = currentYear - 18; // Giới hạn người dùng phải từ 18 tuổi trở lên
+        const minYear = 1940; // Giới hạn đáy để thanh cuộn gọn gàng
 
         // Vòng lặp đổ dữ liệu năm từ mới nhất đến cũ nhất
-        for (let year = endYear; year >= startYear; year--) {
-            const option = document.createElement("option");
+        for (let year = maxAllowedYear; year >= minYear; year--) {
+            const option = document.createElement('option');
             option.value = year;
             option.textContent = year;
-            dobSelect.appendChild(option);
+            yobSelect.appendChild(option);
         }
+
+        // Xử lý đổi màu chữ khi người dùng đã chọn năm (xóa mờ)
+        yobSelect.addEventListener('change', function() {
+            this.style.color = '#fff';
+        });
     }
 
     if (!registerForm) return;
@@ -29,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const nameInput = document.getElementById("name");
         const emailInput = document.getElementById("email");
         const passwordInput = document.getElementById("password");
+        const rePasswordInput = document.getElementById("rePassword");
         const submitBtn = document.querySelector(".btn-login-submit");
 
         // Kiểm tra trường Họ và Tên không được bỏ trống hoặc quá ngắn
@@ -53,10 +56,17 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
+        // Kiểm tra Mật khẩu nhập lại có khớp không
+        if (passwordInput.value !== rePasswordInput.value) {
+            alert("Mật khẩu nhập lại không khớp, vui lòng kiểm tra lại.");
+            rePasswordInput.focus();
+            return;
+        }
+
         // Kiểm tra bắt buộc phải chọn năm sinh
-        if (!dobSelect.value) {
+        if (!yobSelect.value) {
             alert("Vui lòng lựa chọn năm sinh của bạn.");
-            dobSelect.focus();
+            yobSelect.focus();
             return;
         }
 

@@ -5,10 +5,12 @@
     --color-1: #00B14F; /* Màu chính: Xanh lá (Phù hợp cho nút nhấn, điểm nhấn) */
     --color-2: #FFFFFF; /* Màu nền/text: Trắng */
     --color-3: #FFDE59; /* Màu phụ: Vàng (Phù hợp cho hover, icon, cảnh báo) */
+    --color-dark: #1a1c1a;
     
     /* Gợi ý thêm vài biến để dễ quản lý hơn */
+    --color-bg: #f4f6f8;
     --text-color: #333333;
-    --transition-speed: 0.3s;
+    --transition-speed: 0.3s; 
 }
 
 /* =========================================
